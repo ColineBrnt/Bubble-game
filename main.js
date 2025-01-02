@@ -1,5 +1,5 @@
 // On affiche le nombre de bulles supprimées dans le h3
-const counterDisplay = document.querySelector("h3");
+const counterDisplay = document.querySelector("h2");
 let counter = 0;
 
 // Fonction fléchée pour créer les bulles
@@ -12,7 +12,6 @@ const bubbleMaker = () => {
   const size = Math.random() * 10 + 5 + "rem";
   bubble.style.height = size;
   bubble.style.width = size;
-  // console.log(size);
 
   bubble.style.top = Math.random() * 100 + 50 + "%";
   bubble.style.left = Math.random() * 100 + "%";
@@ -26,7 +25,6 @@ const bubbleMaker = () => {
   bubble.addEventListener("click", () => {
     bubble.remove();
     counter++;
-    // console.log(counter);
     counterDisplay.innerText = counter;
   });
 
