@@ -1,9 +1,45 @@
+/* Style global */
+
 body {
     overflow: hidden;
-    min-height: 100vh;
     cursor: crosshair;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+main {
+    flex: 1;
+    /* Permet au main de s'étendre entre le header et le footer */
+    display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    /* Nécessaire pour positionner les bulles avec absolute */
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #333;
+    margin: 0;
 }
 
 h2 {
@@ -14,7 +50,7 @@ h2 {
 
 .bubble {
     position: absolute;
-    border-radius: 100rem;
+    border-radius: 50%;
     background-color: rgba(255, 166, 0);
     opacity: 0;
     animation: anim 15s forwards;

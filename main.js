@@ -1,38 +1,48 @@
-// On affiche le nombre de bulles supprimées dans le h3
+// Constantes globales
 const counterDisplay = document.querySelector("h2");
+const bubbleInterval = 200; // Intervalle entre chaque bulle en ms
+const bubbleDuration = 15000; // Durée de vie d'une bulle en ms
 let counter = 0;
 
-// Fonction fléchée pour créer les bulles
+// Fonction pour générer un nombre aléatoire dans une plage donnée
+const getRandomValue = (min, max) => Math.random() * (max - min) + min;
+
+// Fonction pour créer les bulles
 const bubbleMaker = () => {
+  if (!counterDisplay) {
+    console.error("Élément h2 non trouvé !");
+    return;
+  }
+
   const bubble = document.createElement("span");
   bubble.classList.add("bubble");
   document.body.appendChild(bubble);
 
-  // Math.random() : Object qui utilise la méthode random (prend nb entre 0 et 1)
-  const size = Math.random() * 10 + 5 + "rem";
+  // Taille aléatoire de la bulle
+  const size = `${getRandomValue(5, 15)}rem`;
   bubble.style.height = size;
   bubble.style.width = size;
 
-  bubble.style.top = Math.random() * 100 + 50 + "%";
-  bubble.style.left = Math.random() * 100 + "%";
+  // Position aléatoire
+  bubble.style.top = `${getRandomValue(50, 100)}%`;
+  bubble.style.left = `${getRandomValue(0, 100)}%`;
 
-  // Ternaire  : si supérieure à 0.5 ? renvoie 1 : sinon renvoie -1
+  // Mouvement horizontal aléatoire
   const plusMinus = Math.random() > 0.5 ? 1 : -1;
-  // Créer une propriété à la variable de style "--left", en piochant un chiffre entre 0 et 1
-  bubble.style.setProperty("--left", Math.random() * 100 * plusMinus + "%");
+  bubble.style.setProperty("--left", `${getRandomValue(0, 100) * plusMinus}%`);
 
-  // Fonction fléchée : au click, on supprime la bulle et on ajoute +1 au counter
+  // Gestion du clic : suppression et mise à jour du compteur
   bubble.addEventListener("click", () => {
     bubble.remove();
     counter++;
     counterDisplay.innerText = counter;
   });
 
-  // On supprime les bulles une fois que leur temps d'animation est terminé (15s dans le CSS)
+  // Suppression automatique après la durée définie
   setTimeout(() => {
     bubble.remove();
-  }, 15000);
+  }, bubbleDuration);
 };
 
-// On crée une bulle toutes les 200ms
-setInterval(bubbleMaker, 200);
+// Initialisation des bulles à intervalles réguliers
+setInterval(bubbleMaker, bubbleInterval);
